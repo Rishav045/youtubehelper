@@ -72,6 +72,7 @@ def rishavGemini(q : int,code : str = None):
 
     genai.configure(api_key="AIzaSyBjJkjihTUrVF0JbVEBLUZ5kwZyzzJzROs")
     # response = model.generate_content("Summarize the following text:-  "+result)
-    response = model.generate_content("Create "+str(q)+" questions from the following context "+result)
+    # response = model.generate_content("Create "+str(q)+" questions from the following context "+result)
+    response = model.generate_content("Create "+str(q)+" questions from the following youtube video id "+str(code))
     print(response.text)
     return {"message":response.text}
