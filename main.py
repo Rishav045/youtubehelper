@@ -32,7 +32,7 @@ def getYoutubeScript(code : str = None):
     transcript=""
     video_url=code
     try:
-        transcript= YouTubeTranscriptApi.get_transcript(video_url)
+        transcript= YouTubeTranscriptApi.get_transcript(video_url,languages=['en','hi'])
     except Exception as e :
         print(f"Error retrieving subtitles: {str(e)}")
     result =""
