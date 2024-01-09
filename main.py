@@ -92,11 +92,11 @@ def askme(code : str = None , ques :str =None):
     for content in response.json()[0]['transcription']:
         transcript = transcript + content['subtitle']+" "
     
-    result = transcript
+    
 
     genai.configure(api_key="AIzaSyBjJkjihTUrVF0JbVEBLUZ5kwZyzzJzROs")
 
-    response= model.generate_content("Answer the question "+ques+" from the context "+result+" of the video :- ")
+    response= model.generate_content("Answer the question "+ques+" from the context "+transcript+" of the video :- ")
     print(response.text)
     return {"message":response.text}
 
