@@ -64,6 +64,25 @@ def rishavGemini(code : str = None):
     print(response.text)
     return {"message":response.text}
 
+@app.get('/askme/')
+def askme(code : str = None , ques :str =None):
+    transcript=""
+    video_url=code
+    try:
+        transcript= YouTubeTranscriptApi.get_transcript(video_url,languages=['en','hi'])
+    except Exception as e :
+        print(f"Error retrieving subtitles: {str(e)}")
+    result =""
+    for entry in transcript:
+        result = result + entry['text']
+
+    genai.configure(api_key="AIzaSyBjJkjihTUrVF0JbVEBLUZ5kwZyzzJzROs")
+
+    response= model.generate_content("Answer the question "+ques+" from the context "+result+" of the video :- ")
+    print(response.text)
+    return {"message":response.text}
+
+
 @app.get('/question/')
 def rishavGemini(q : int,code : str = None):
     transcript=""
@@ -81,7 +100,7 @@ def rishavGemini(q : int,code : str = None):
 
     genai.configure(api_key="AIzaSyBjJkjihTUrVF0JbVEBLUZ5kwZyzzJzROs")
     # response = model.generate_content("Summarize the following text:-  "+result)
-    response = model.generate_content("Create "+str(q)+" questions from the following context "+result)
+    response = model.generate_content("Create "+str(q)+" questions and their answers from the following context "+result)
     # response = model.generate_content("Create "+str(q)+" questions from the following youtube video id "+str(code))
     print(response.text)
     return {"message":response.text}
