@@ -102,7 +102,7 @@ def askme(code : str = None , ques :str =None):
 
 
 @app.get('/question/')
-def rishavGemini(q : sdr='10',code : str = None):
+def rishavGemini(q : str='10',code : str = None):
     transcript=""
     url = "https://youtube-transcriptor.p.rapidapi.com/transcript"
 
