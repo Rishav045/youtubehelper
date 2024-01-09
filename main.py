@@ -8,6 +8,7 @@ import pathlib
 import textwrap
 from IPython.display import display
 from IPython.display import Markdown
+import requests
 
 
 def to_markdown(text):
@@ -29,52 +30,69 @@ def root():
     return {"Message":"Hello World"}
 @app.get('/content/')
 def getYoutubeScript(code : str = None):
-    transcript=""
-    video_url=code
-    try:
-        transcript= YouTubeTranscriptApi.get_transcript(video_url,languages=['en','hi'])
-    except Exception as e :
-        print(f"Error retrieving subtitles: {str(e)}")
-    result =""
-    for entry in transcript:
-        result = result + entry['text']
-    return result
+    url = "https://youtube-transcriptor.p.rapidapi.com/transcript"
 
+
+
+    headers = {
+	"X-RapidAPI-Key": "05f93faddamsh06e8d213053c0f4p13558bjsne63c2384e3ca",
+	"X-RapidAPI-Host": "youtube-transcriptor.p.rapidapi.com"
+    }
+    transcript=""
+    querystring = {"video_id":code}
+
+    response = requests.get(url, headers=headers, params=querystring)
+    # print(response.json()['transcription'])
+    for content in response.json()[0]['transcription']:
+        transcript = transcript + content['subtitle']+" "
+    return transcript
 @app.get('/summary/')
 def rishavGemini(code : str = None):
     transcript=""
-    video_url=code
-    try:
-        transcript= YouTubeTranscriptApi.get_transcript(video_url,languages=['en','hi'])
-    except Exception as e :
-        print(f"Error retrieving subtitles: {str(e)}")
-    result =""
-    for entry in transcript:
-        result = result + entry['text']
-    
+    url = "https://youtube-transcriptor.p.rapidapi.com/transcript"
 
 
 
+    headers = {
+	"X-RapidAPI-Key": "05f93faddamsh06e8d213053c0f4p13558bjsne63c2384e3ca",
+	"X-RapidAPI-Host": "youtube-transcriptor.p.rapidapi.com"
+    }
+    transcript=""
+    querystring = {"video_id":code}
+    response = requests.get(url, headers=headers, params=querystring)
+    # print(response.json()['transcription'])
+    for content in response.json()[0]['transcription']:
+        transcript = transcript + content['subtitle']+" "
+
+
+    if(transcript==""):
+        return {"message":"sorry the subtitles are not available for this video"}
     genai.configure(api_key="AIzaSyBjJkjihTUrVF0JbVEBLUZ5kwZyzzJzROs")
-    # response = model.generate_content("Summarize the following text:-  "+result)
-    response = model.generate_content("Explain the following text which is a script of a video :- "+result)
+    response = model.generate_content("Explain the following text which is a script of a video :-  "+transcript)
     # response = model.generate_content("Explain the youtube video with video id  "+str(code)+" ")
-
-  # "Explain the youtube video with video id  "+str(code)+" "
-    print(response.text)
+    # print(response._chunks)
+    # print(response.text)
     return {"message":response.text}
 
 @app.get('/askme/')
 def askme(code : str = None , ques :str =None):
     transcript=""
-    video_url=code
-    try:
-        transcript= YouTubeTranscriptApi.get_transcript(video_url,languages=['en','hi'])
-    except Exception as e :
-        print(f"Error retrieving subtitles: {str(e)}")
-    result =""
-    for entry in transcript:
-        result = result + entry['text']
+    url = "https://youtube-transcriptor.p.rapidapi.com/transcript"
+
+
+
+    headers = {
+	"X-RapidAPI-Key": "05f93faddamsh06e8d213053c0f4p13558bjsne63c2384e3ca",
+	"X-RapidAPI-Host": "youtube-transcriptor.p.rapidapi.com"
+    }
+    transcript=""
+    querystring = {"video_id":code}
+    response = requests.get(url, headers=headers, params=querystring)
+    # print(response.json()['transcription'])
+    for content in response.json()[0]['transcription']:
+        transcript = transcript + content['subtitle']+" "
+    
+    result = transcript
 
     genai.configure(api_key="AIzaSyBjJkjihTUrVF0JbVEBLUZ5kwZyzzJzROs")
 
@@ -84,23 +102,32 @@ def askme(code : str = None , ques :str =None):
 
 
 @app.get('/question/')
-def rishavGemini(q : int,code : str = None):
+def rishavGemini(q : sdr='10',code : str = None):
     transcript=""
-    video_url=code
-    try:
-        transcript= YouTubeTranscriptApi.get_transcript(video_url,languages=['en','hi'])
-    except Exception as e :
-        print(f"Error retrieving subtitles: {str(e)}")
-    result =""
-    for entry in transcript:
-        result = result + entry['text']
+    url = "https://youtube-transcriptor.p.rapidapi.com/transcript"
+
+
+
+    headers = {
+	"X-RapidAPI-Key": "05f93faddamsh06e8d213053c0f4p13558bjsne63c2384e3ca",
+	"X-RapidAPI-Host": "youtube-transcriptor.p.rapidapi.com"
+    }
+    transcript=""
+    querystring = {"video_id":code}
+    response = requests.get(url, headers=headers, params=querystring)
+    # print(response.json()['transcription'])
+    for content in response.json()[0]['transcription']:
+        transcript = transcript + content['subtitle']+" "
     
 
-
-
+    print(transcript)
+    if(transcript==""):
+        return {"message":"sorry the subtitles are not available for this video"}
+    
     genai.configure(api_key="AIzaSyBjJkjihTUrVF0JbVEBLUZ5kwZyzzJzROs")
-    # response = model.generate_content("Summarize the following text:-  "+result)
-    response = model.generate_content("Create "+str(q)+" questions and their answers from the following context "+result)
+    response = model.generate_content("List out "+q+" questions along with their answers from text :- "+transcript)
+    print(response.prompt_feedback)
+    # response = model.generate_content("Explain the following text which is a script of a video :-  "+transcript)
     # response = model.generate_content("Create "+str(q)+" questions from the following youtube video id "+str(code))
-    print(response.text)
+    
     return {"message":response.text}
