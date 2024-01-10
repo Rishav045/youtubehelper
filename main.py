@@ -78,6 +78,7 @@ def rishavGemini(code : str = None):
     # response = model.generate_content("Explain the youtube video with video id  "+str(code)+" ")
     # print(response._chunks)
     # print(response.text)
+    print(response.prompt_feedback)
     return {"message":response.text}
 
 @app.get('/askme/')
