@@ -39,7 +39,8 @@ def getYoutubeScript(code : str = None):
 
 
     headers = {
-	"X-RapidAPI-Key": "05f93faddamsh06e8d213053c0f4p13558bjsne63c2384e3ca",
+	# "X-RapidAPI-Key": "05f93faddamsh06e8d213053c0f4p13558bjsne63c2384e3ca",
+    "X-RapidAPI-Key":"263a07c313msh5ca70463c5264bcp191e3ajsne9b0d563c2dd",
 	"X-RapidAPI-Host": "youtube-transcriptor.p.rapidapi.com"
     }
     transcript=""
@@ -58,7 +59,8 @@ def rishavGemini(code : str = None):
 
 
     headers = {
-	"X-RapidAPI-Key": "05f93faddamsh06e8d213053c0f4p13558bjsne63c2384e3ca",
+	# "X-RapidAPI-Key": "05f93faddamsh06e8d213053c0f4p13558bjsne63c2384e3ca",
+    "X-RapidAPI-Key":"263a07c313msh5ca70463c5264bcp191e3ajsne9b0d563c2dd",
 	"X-RapidAPI-Host": "youtube-transcriptor.p.rapidapi.com"
     }
     transcript=""
@@ -86,7 +88,8 @@ def askme(code : str = None , ques :str =None):
 
 
     headers = {
-	"X-RapidAPI-Key": "05f93faddamsh06e8d213053c0f4p13558bjsne63c2384e3ca",
+	# "X-RapidAPI-Key": "05f93faddamsh06e8d213053c0f4p13558bjsne63c2384e3ca",
+    "X-RapidAPI-Key":"263a07c313msh5ca70463c5264bcp191e3ajsne9b0d563c2dd",
 	"X-RapidAPI-Host": "youtube-transcriptor.p.rapidapi.com"
     }
     transcript=""
@@ -113,7 +116,8 @@ def rishavGemini(q : str='10',code : str = None):
 
 
     headers = {
-	"X-RapidAPI-Key": "05f93faddamsh06e8d213053c0f4p13558bjsne63c2384e3ca",
+	# "X-RapidAPI-Key": "05f93faddamsh06e8d213053c0f4p13558bjsne63c2384e3ca",
+    "X-RapidAPI-Key":"263a07c313msh5ca70463c5264bcp191e3ajsne9b0d563c2dd",
 	"X-RapidAPI-Host": "youtube-transcriptor.p.rapidapi.com"
     }
     transcript=""
