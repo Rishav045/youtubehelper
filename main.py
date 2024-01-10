@@ -17,6 +17,10 @@ def to_markdown(text):
 
 app = FastAPI()
 
+origins =[
+    "https://ashishrnx.github.io",
+]
+
 app.add_middleware(
   CORSMiddleware,
   allow_origins=["*"],
