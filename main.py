@@ -47,6 +47,7 @@ def getYoutubeScript(code : str = None):
     querystring = {"video_id":code}
 
     response = requests.get(url, headers=headers, params=querystring)
+    print(response.json())
     # print(response.json()['transcription'])
     for content in response.json()[0]['transcription']:
         transcript = transcript + content['subtitle']+" "
@@ -66,6 +67,7 @@ def rishavGemini(code : str = None):
     transcript=""
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
+    print(response.json())
     # print(response.json()['transcription'])
     for content in response.json()[0]['transcription']:
         transcript = transcript + content['subtitle']+" "
