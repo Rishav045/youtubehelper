@@ -48,9 +48,8 @@ def getYoutubeScript(code : str = None):
 
     response = requests.get(url, headers=headers, params=querystring)
     # print(response.json())
-    print(response.json()[0].get('availableLangs'))
-    if(response.json()[0].get('availableLangs')=="None"):
-        return {'message':'Script of this video is not available for any languages'}
+    if(response.json().get('error')!="None"):
+        return {'message':response.json().get('error')}
     # print(response.json()['transcription'])
     for content in response.json()[0]['transcription']:
         transcript = transcript + content['subtitle']+" "
@@ -71,6 +70,8 @@ def rishavGemini(code : str = None):
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
     print(response.json())
+    if(response.json().get('error')!="None"):
+        return {'message':response.json().get('error')}
     # print(response.json()['transcription'])
     for content in response.json()[0]['transcription']:
         transcript = transcript + content['subtitle']+" "
@@ -101,6 +102,8 @@ def askme(code : str = None , ques :str =None):
     transcript=""
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
+    if(response.json().get('error')!="None"):
+        return {'message':response.json().get('error')}
     # print(response.json()['transcription'])
     for content in response.json()[0]['transcription']:
         transcript = transcript + content['subtitle']+" "
@@ -129,6 +132,8 @@ def rishavGemini(q : str='10',code : str = None):
     transcript=""
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
+    if(response.json().get('error')!="None"):
+        return {'message':response.json().get('error')}
     # print(response.json()['transcription'])
     for content in response.json()[0]['transcription']:
         transcript = transcript + content['subtitle']+" "
