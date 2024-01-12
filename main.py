@@ -47,12 +47,13 @@ def getYoutubeScript(code : str = None):
     querystring = {"video_id":code}
 
     response = requests.get(url, headers=headers, params=querystring)
-    # print(response.json())
-    if(response.json().get('error')!="None"):
-        return {'message':response.json().get('error')}
-    # print(response.json()['transcription'])
-    for content in response.json()[0]['transcription']:
-        transcript = transcript + content['subtitle']+" "
+    print(response.json())
+    try:
+        for content in response.json()[0]['transcription']:
+            transcript = transcript + content['subtitle']+" "
+    except KeyError as Ie:
+        print(f"Index error {Ie}")
+        return {"message":"No Script available for this video"}
     return transcript
 @app.get('/summary/')
 def rishavGemini(code : str = None):
@@ -70,11 +71,13 @@ def rishavGemini(code : str = None):
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
     print(response.json())
-    if(response.json().get('error')!="None"):
-        return {'message':response.json().get('error')}
-    # print(response.json()['transcription'])
-    for content in response.json()[0]['transcription']:
-        transcript = transcript + content['subtitle']+" "
+    try:
+        for content in response.json()[0]['transcription']:
+            transcript = transcript + content['subtitle']+" "
+    except KeyError as Ie:
+        print(f"Index error {Ie}")
+        return {"message":"No Script available for this video"}
+    
 
 
     if(transcript==""):
@@ -102,11 +105,13 @@ def askme(code : str = None , ques :str =None):
     transcript=""
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
-    if(response.json().get('error')!="None"):
-        return {'message':response.json().get('error')}
-    # print(response.json()['transcription'])
-    for content in response.json()[0]['transcription']:
-        transcript = transcript + content['subtitle']+" "
+    try:
+        for content in response.json()[0]['transcription']:
+            transcript = transcript + content['subtitle']+" "
+    except KeyError as Ie:
+        print(f"Index error {Ie}")
+        return {"message":"No Script available for this video"}
+    
     
     
 
@@ -132,11 +137,13 @@ def rishavGemini(q : str='10',code : str = None):
     transcript=""
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
-    if(response.json().get('error')!="None"):
-        return {'message':response.json().get('error')}
-    # print(response.json()['transcription'])
-    for content in response.json()[0]['transcription']:
-        transcript = transcript + content['subtitle']+" "
+    try:
+        for content in response.json()[0]['transcription']:
+            transcript = transcript + content['subtitle']+" "
+    except KeyError as Ie:
+        print(f"Index error {Ie}")
+        return {"message":"No Script available for this video"}
+    return transcript
     
 
     print(transcript)
