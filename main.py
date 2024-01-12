@@ -143,7 +143,7 @@ def rishavGemini(q : str='10',code : str = None):
     except KeyError as Ie:
         print(f"Index error {Ie}")
         return {"message":"No Script available for this video"}
-    return transcript
+    
     
 
     print(transcript)
