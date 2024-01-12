@@ -49,7 +49,7 @@ def getYoutubeScript(code : str = None):
     response = requests.get(url, headers=headers, params=querystring)
     # print(response.json())
     print(response.json()[0]['availableLangs'])
-    if(len(response.json()[0]['availableLangs'])):
+    if(len(response.json()[0]['availableLangs'])==0):
         return {'message':'Script of this video is not available for any languages'}
     # print(response.json()['transcription'])
     for content in response.json()[0]['transcription']:
