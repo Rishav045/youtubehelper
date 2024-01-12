@@ -15,6 +15,30 @@ def to_markdown(text):
   text = text.replace('•', '  *')
   return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 
+def url_to_code(url):
+    code=""
+    if(url.find("www.youtube.com")!=-1):
+  # print("running")
+        for i in range(url.find('v=')+2,len(url)):
+            if(url[i]=='&'):
+                break
+            else:
+                code = code+url[i]
+    elif(url.find("youtu.be")!=-1):
+  # print(url.find("youtu.be"))
+        for i in range(url.find("youtu.be")+9,len(url)):
+            if(url[i]=='?'):
+                break
+            else:
+                code = code + url[i]
+    else:
+        return("sorry this is not the valid url ")
+    return(code)
+def to_markdown(text):
+  text = text.replace('•', '  *')
+  return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
+
+
 app = FastAPI()
 
 origins =[
@@ -44,6 +68,7 @@ def getYoutubeScript(code : str = None):
 	"X-RapidAPI-Host": "youtube-transcriptor.p.rapidapi.com"
     }
     transcript=""
+    code=url_to_code(code)
     querystring = {"video_id":code}
 
     response = requests.get(url, headers=headers, params=querystring)
@@ -68,6 +93,7 @@ def rishavGemini(code : str = None):
 	"X-RapidAPI-Host": "youtube-transcriptor.p.rapidapi.com"
     }
     transcript=""
+    code=url_to_code(code)
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
     print(response.json())
@@ -104,6 +130,7 @@ def askme(code : str = None , ques :str =None):
 	"X-RapidAPI-Host": "youtube-transcriptor.p.rapidapi.com"
     }
     transcript=""
+    code=url_to_code(code)
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
     try:
@@ -137,6 +164,7 @@ def rishavGemini(q : str='10',code : str = None):
 	"X-RapidAPI-Host": "youtube-transcriptor.p.rapidapi.com"
     }
     transcript=""
+    code=url_to_code(code)
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
     try:
