@@ -75,7 +75,7 @@ def getYoutubeScript(code : str = None):
     print(response.json())
     try:
         for content in response.json()[0]['transcription']:
-            transcript = transcript + content['subtitle']+" "
+            transcript = transcript + str(content['subtitle'])+" "
     except KeyError as Ie:
         print(f"Index error {Ie}")
         return {"message":"No Script available for this video"}
@@ -99,7 +99,7 @@ def rishavGemini(code : str = None):
     print(response.json())
     try:
         for content in response.json()[0]['transcription']:
-            transcript = transcript + content['subtitle']+" "
+            transcript = transcript + str(content['subtitle'])+" "
     except KeyError as Ie:
         print(f"Index error {Ie}")
         return {"message":"No Script available for this video"}
@@ -135,7 +135,7 @@ def askme(code : str = None , ques :str =None):
     response = requests.get(url, headers=headers, params=querystring)
     try:
         for content in response.json()[0]['transcription']:
-            transcript = transcript + content['subtitle']+" "
+            transcript = transcript + str(content['subtitle'])+" "
     except KeyError as Ie:
         print(f"Index error {Ie}")
         return {"message":"No Script available for this video"}
@@ -169,7 +169,7 @@ def rishavGemini(q : str='10',code : str = None):
     response = requests.get(url, headers=headers, params=querystring)
     try:
         for content in response.json()[0]['transcription']:
-            transcript = transcript + content['subtitle']+" "
+            transcript = transcript + str(content['subtitle'])+" "
     except KeyError as Ie:
         print(f"Index error {Ie}")
         return {"message":"No Script available for this video"}
