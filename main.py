@@ -32,7 +32,7 @@ def url_to_code(url):
             else:
                 code = code + url[i]
     else:
-        return("sorry this is not the valid url ")
+        return("blank")
     return(code)
 def to_markdown(text):
   text = text.replace('•', '  *')
@@ -69,6 +69,8 @@ def getYoutubeScript(code : str = None):
     }
     transcript=""
     code=url_to_code(code)
+    if(code=="blank"):
+        return {"message":"Please enter correct URL "}
     querystring = {"video_id":code}
 
     response = requests.get(url, headers=headers, params=querystring)
@@ -94,6 +96,8 @@ def rishavGemini(code : str = None):
     }
     transcript=""
     code=url_to_code(code)
+    if(code=="blank"):
+        return {"message":"Please enter correct URL "}
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
     print(response.json())
@@ -131,6 +135,8 @@ def askme(code : str = None , ques :str =None):
     }
     transcript=""
     code=url_to_code(code)
+    if(code=="blank"):
+        return {"message":"Please enter correct URL "}
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
     try:
@@ -165,6 +171,8 @@ def rishavGemini(q : str='10',code : str = None):
     }
     transcript=""
     code=url_to_code(code)
+    if(code=="blank"):
+        return {"message":"Please enter correct URL "}
     querystring = {"video_id":code}
     response = requests.get(url, headers=headers, params=querystring)
     try:
