@@ -108,8 +108,8 @@ def rishavGemini(code : str = None):
         print(f"Index error {Ie}")
         return {"message":"No Script available for this video"}
     
-    if(int(response.json()[0]['lengthInSeconds'])>2700):
-        return {"message":"Please provide the video's code length less than 30 minutes."}
+    if(int(response.json()[0]['lengthInSeconds'])>5400):
+        return {"message":"Please provide the video's code length less than 90 minutes."}
 
     if(transcript==""):
         return {"message":"sorry the subtitles are not available for this video"}
@@ -146,8 +146,8 @@ def askme(code : str = None , ques :str =None):
         print(f"Index error {Ie}")
         return {"message":"No Script available for this video"}
     
-    if(int(response.json()[0]['lengthInSeconds'])>2700):
-        return {"message":"Please provide the video's code length less than 30 minutes."}
+    if(int(response.json()[0]['lengthInSeconds'])>5400):
+        return {"message":"Please provide the video's code length less than 90 minutes."}
     
 
     genai.configure(api_key="AIzaSyBjJkjihTUrVF0JbVEBLUZ5kwZyzzJzROs")
