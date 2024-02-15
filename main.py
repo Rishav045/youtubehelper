@@ -114,7 +114,7 @@ def rishavGemini(code : str = None):
     if(transcript==""):
         return {"message":"sorry the subtitles are not available for this video"}
     genai.configure(api_key="AIzaSyBjJkjihTUrVF0JbVEBLUZ5kwZyzzJzROs")
-    response = model.generate_content("Briefly describe following text and explain each topic which is a script of a video :-  "+transcript)
+    response = model.generate_content("Prepare a report or article over the script of a video :-  "+transcript)
     # response = model.generate_content("Briefly describe the youtube video with video id  "+str(code)+" ")
     # print(response._chunks)
     # print(response.text)
