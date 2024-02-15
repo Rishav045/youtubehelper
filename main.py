@@ -182,8 +182,8 @@ def rishavGemini(q : str='10',code : str = None):
         print(f"Index error {Ie}")
         return {"message":"No Script available for this video"}
     
-    if(int(response.json()[0]['lengthInSeconds'])>2700):
-        return {"message":"Please provide the video's code length less than 30 minutes."}
+    if(int(response.json()[0]['lengthInSeconds'])>5400):
+        return {"message":"Please provide the video's code length less than 90 minutes."}
 
     print(transcript)
     if(transcript==""):
