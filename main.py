@@ -113,8 +113,8 @@ def rishavGemini(code : str = None):
 
     if(transcript==""):
         return {"message":"sorry the subtitles are not available for this video"}
-    genai.configure(api_key="AIzaSyBjJkjihTUrVF0JbVEBLUZ5kwZyzzJzROs")
-    response = model.generate_content("Prepare a report or article over the script of a video :-  "+transcript)
+    genai.configure(api_key="AIzaSyDfBUXvWleeus9K2s0zCXHqsQMnQgdmAak")
+    response = model.generate_content("Prepare a report or article over the script of a video in english:-  "+transcript)
     # response = model.generate_content("Briefly describe the youtube video with video id  "+str(code)+" ")
     # print(response._chunks)
     # print(response.text)
@@ -150,9 +150,9 @@ def askme(code : str = None , ques :str =None):
         return {"message":"Please provide the video's code length less than 90 minutes."}
     
 
-    genai.configure(api_key="AIzaSyBjJkjihTUrVF0JbVEBLUZ5kwZyzzJzROs")
+    genai.configure(api_key="AIzaSyDfBUXvWleeus9K2s0zCXHqsQMnQgdmAak")
 
-    response= model.generate_content("Answer the question "+ques+" from the context "+transcript+" of the video :- ")
+    response= model.generate_content("Answer the question "+ques+" from the context "+transcript+" of the video in English:- ")
     print(response.text)
     return {"message":response.text}
 
@@ -189,8 +189,8 @@ def rishavGemini(q : str='10',code : str = None):
     if(transcript==""):
         return {"message":"sorry the subtitles are not available for this video"}
     
-    genai.configure(api_key="AIzaSyBjJkjihTUrVF0JbVEBLUZ5kwZyzzJzROs")
-    response = model.generate_content("List out "+q+" questions along with their answers from text :- "+transcript)
+    genai.configure(api_key="AIzaSyDfBUXvWleeus9K2s0zCXHqsQMnQgdmAak")
+    response = model.generate_content("List out "+q+" questions along with their answers from text in English:- "+transcript)
     print(response.prompt_feedback)
     # response = model.generate_content("Explain the following text which is a script of a video :-  "+transcript)
     # response = model.generate_content("Create "+str(q)+" questions from the following youtube video id "+str(code))
